@@ -1,3 +1,19 @@
+:root {
+  background-image: linear-gradient(rgb(70, 71, 73), rgb(238, 238, 238));
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
+}
+
 .App {
   padding: 1rem;
+}
+
+
+.TableHead {
+  background: rgb(117, 192, 241);
+}
+
+header h1 {
+  color: white;
 }
