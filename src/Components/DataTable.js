@@ -38,7 +38,7 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Full Name (Last, First)' },
+  { id: 'name', numeric: false, disablePadding: false, label: 'Full Name (Last, First)' },
   { id: 'email', numeric: false, disablePadding: false, label: 'Email Address' },
   { id: 'phone', numeric: false, disablePadding: false, label: 'Phone Number' },
   { id: 'city', numeric: false, disablePadding: false, label: 'City, Country' },
@@ -52,12 +52,12 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead>
+    <TableHead className={'TableHead'}>
       <TableRow>
         {headCells.map((headCell, index) => (
           <TableCell
             key={headCell.id}
-            align={(index !== 0) ? 'right' : 'left'}
+            align={'left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -112,8 +112,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable({people}) {
-  const rows = people.map(person => {
+export default function EnhancedTable({people, results}) {
+  const rowSource = (results.length === 0) ? people : results;
+  const rows = rowSource.map(person => {
     return {
       name: `${person.name.last}, ${person.name.first}`,
       email: person.email,
@@ -174,13 +175,13 @@ export default function EnhancedTable({people}) {
                       tabIndex={-1}
                       key={row.id}
                     >
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                      <TableCell component="th" id={labelId} scope="row">
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.email}</TableCell>
-                      <TableCell align="right">{row.phone}</TableCell>
-                      <TableCell align="right">{row.city}</TableCell>
-                      <TableCell align="right">{row.address}</TableCell>
+                      <TableCell align="left">{row.email}</TableCell>
+                      <TableCell align="left">{row.phone}</TableCell>
+                      <TableCell align="left">{row.city}</TableCell>
+                      <TableCell align="left">{row.address}</TableCell>
                     </TableRow>
                   );
                 })}
